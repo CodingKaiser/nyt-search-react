@@ -6,4 +6,4 @@ const router = express.Router()
 module.exports = router
   .get('/article', apiController.getArticles)
   .post('/article', apiController.postArticle)
-  .delete('/article', apiController.delArticle)
+  .put('/article', apiController.delArticle)

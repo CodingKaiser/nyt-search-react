@@ -3,6 +3,7 @@ var React = require("react");
 
 var helpers = require("../utils/helpers");
 
+var SavedResult = require("./Saved-Results")
 
 var Saved = React.createClass({
 
@@ -22,20 +23,31 @@ var Saved = React.createClass({
     }.bind(this));
   },
 
+  removeSaved: function(id) {
+    let indexToRemove = -1
+    for (let i = 0; i < this.state.saved.length; i++) {
+      if (this.state.saved[i]._id === id) {
+        indexToRemove = i
+      }
+    }
+    this.state.saved.splice(indexToRemove, 1)
+    this.setState({ saved: this.state.saved})
+  },
+
   render: function() {
     return (
       <div className="container">
         <div className="col-lg-12">
           <div className="panel panel-danger">
             <div className="panel-heading">
-              <h3 className="panel-title">Child #2</h3>
+              <h3 className="panel-title">Saved Articles</h3>
             </div>
             <div className="panel-body">
-              {this.state.saved.map(function(save, i) {
+              {this.state.saved.map(function(res, i) {
                 return (
-                  <p key={i}>{save.title} - {save.date}</p>
+                  <SavedResult removeSaved={this.removeSaved} articleInfo={res} key={i} />
                 );
-              })}
+              }.bind(this))}
             </div>
           </div>
         </div>
