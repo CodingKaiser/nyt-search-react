@@ -1,5 +1,7 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
+var Link = require("react-router").Link;
+
 
 var SavedResult = React.createClass({
 
@@ -15,7 +17,7 @@ var SavedResult = React.createClass({
   render: function() {
     return (
       <div className="panel panel-default">
-        <div className="panel-heading">{this.props.articleInfo.title}</div>
+        <div className="panel-heading"><a target="_blank" href={this.props.articleInfo.url}>{this.props.articleInfo.title}</a></div>
         <div className="panel-body">
           From: {this.props.articleInfo.date}
         </div>
