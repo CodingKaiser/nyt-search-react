@@ -3,7 +3,27 @@ var React = require("react");
 // Including the Link component from React Router to navigate within our application without full page reloads
 var Link = require("react-router").Link;
 
+var helpers = require("./utils/helpers");
+
 var Main = React.createClass({
+
+  // Here we set a generic state associated with the number of clicks
+  // Note how we added in this history state variable
+  getInitialState: function() {
+    return { searchTerm: "", results: "", saved: [] };
+  },
+
+  // The moment the page renders get the History
+  componentDidMount: function() {
+    // Get the latest history.
+    helpers.getSaved().then(function(response) {
+      console.log(response);
+      if (response !== this.state.saved) {
+        console.log("Saved", response.data);
+        this.setState({ saved: response.data });
+      }
+    }.bind(this));
+  },
 
   // Here we render the function
   render: function() {
