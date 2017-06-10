@@ -125,17 +125,12 @@ var Search = React.createClass({
                   </button>
                 </div>
               </form>
-              <p>
-                <Link to="/Search/Results"><button className="btn btn-warning btn-sm">Show Grandchild #1</button></Link>
-              </p>
               {this.state.results.map(function(res, i) {
                 return (
                   <SearchResult removeResult={this.removeResult} articleInfo={res} key={i} />
                 );
               }.bind(this))}
 
-              {/* This code will allow us to automatically dump the correct GrandChild component */}
-              {this.props.children}
             </div>
 
           </div>
