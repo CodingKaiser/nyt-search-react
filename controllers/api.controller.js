@@ -13,7 +13,7 @@ module.exports.getArticles = (req, res) => {
 }
 
 module.exports.postArticle = (req, res) => {
-  Article.create(req.body, (err, saved) => {
+  Article.update({ "_id": req.body._id }, req.body, { upsert: true }, (err, saved) => {
     if (err) {
       console.log(err)
     } else {

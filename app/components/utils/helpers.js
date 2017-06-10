@@ -27,6 +27,7 @@ var helper = {
           trimmedInfo["title"] = article.headline.main
           trimmedInfo["date"] = article.pub_date
           trimmedInfo["url"] = article.web_url
+          trimmedInfo["_id"] = article._id
           result.push(trimmedInfo)
         }
       }

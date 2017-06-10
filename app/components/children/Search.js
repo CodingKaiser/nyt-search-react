@@ -3,6 +3,8 @@ var React = require("react");
 // Including the Link component from React Router to navigate within our application without full page reloads
 var Link = require("react-router").Link;
 
+var SearchResult = require("./Search-Result")
+
 var helpers = require("../utils/helpers");
 
 var Search = React.createClass({
@@ -32,6 +34,17 @@ var Search = React.createClass({
 
     this.setState({ end_date: event.target.value });
 
+  },
+
+  removeResult: function(id) {
+    let indexToRemove = -1
+    for (let i = 0; i < this.state.results.length; i++) {
+      if (this.state.results[i]._id === id) {
+        indexToRemove = i
+      }
+    }
+    this.state.results.splice(indexToRemove, 1)
+    this.setState({ results: this.state.results})
   },
 
   // When a user submits...
@@ -117,9 +130,9 @@ var Search = React.createClass({
               </p>
               {this.state.results.map(function(res, i) {
                 return (
-                  <p key={i}>{res.title} - {res.date}</p>
+                  <SearchResult removeResult={this.removeResult} articleInfo={res} key={i} />
                 );
-              })}
+              }.bind(this))}
 
               {/* This code will allow us to automatically dump the correct GrandChild component */}
               {this.props.children}
